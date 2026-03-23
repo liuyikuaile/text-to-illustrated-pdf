@@ -19,9 +19,14 @@
 
 用于 AI 生成图片（场景、氛围等）。
 
-- **安装地址**：https://creaa.ai/blog/openclaw-skill
+- **安装地址**：请查看 [Creaa AI 使用指南](https://creaa.ai/blog/openclaw-skill)
 - **作用**：调用 Creaa 平台生成图片
 - **注意**：Creaa 是第三方平台，需要**充值积分**才能使用生图功能
+- **更多信息**：https://creaa.ai/blog/openclaw-skill 包含：
+  - Creaa AI Skill 安装地址
+  - API Key 获取方式
+  - 充值入口
+  - 收费标准说明
 
 ---
 
@@ -191,4 +196,4 @@ python3 scripts/save.py --filename "极简" < temp/极简.md
 
 - **Tavily Search Skill**: https://clawhub.ai/Jacky1n7/openclaw-tavily-search
 - **Creaa AI 官网**: https://creaa.ai
-- **Creaa AI 使用指南**: https://creaa.ai/blog/openclaw-skill
+- **Creaa AI 完整指南**（含安装地址、充值入口、收费标准）: https://creaa.ai/blog/openclaw-skill
