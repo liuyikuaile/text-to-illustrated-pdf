@@ -2,6 +2,29 @@
 
 智能文字配图 → PDF 生成工具。LLM 分析文本，Tavily 搜索作品图，Creaa AI 生成场景图，生成图文并茂的 PDF 文档。
 
+---
+
+## ⚠️ 前置依赖
+
+本技能依赖以下 OpenClaw Skills，请先安装：
+
+### 1. Tavily Search Skill
+
+用于搜索图片（艺术家、作品等）。
+
+- **安装地址**：https://clawhub.ai/Jacky1n7/openclaw-tavily-search
+- **作用**：搜索网络图片，识别摄影作品、艺术家作品
+
+### 2. Creaa AI Skill
+
+用于 AI 生成图片（场景、氛围等）。
+
+- **安装地址**：https://creaa.ai/blog/openclaw-skill
+- **作用**：调用 Creaa 平台生成图片
+- **注意**：Creaa 是第三方平台，需要**充值积分**才能使用生图功能
+
+---
+
 ## 环境配置
 
 ### 1. 安装系统依赖
@@ -25,14 +48,18 @@ pip install -r requirements.txt
 
 ```bash
 # Creaa AI API 密钥（必需）
+# 获取方式：https://creaa.ai 注册账号并充值积分
 export CREAA_API_KEY=your_creaa_api_key
 
 # Tavily API 密钥（必需）
+# 获取方式：在 tavily-search skill 中配置
 export TAVILY_API_KEY=your_tavily_api_key
 
 # 可选：自定义工作目录（默认使用脚本所在目录）
 export TEXT_TO_PDF_DIR=/path/to/workspace
 ```
+
+---
 
 ## 快速开始
 
@@ -55,6 +82,8 @@ python3 scripts/tavily_search.py "搜索关键词"
 python3 scripts/creaa_ai.py "生成提示词" --model seedream-5.0
 ```
 
+---
+
 ## 目录结构
 
 ```
@@ -64,14 +93,16 @@ text-to-illustrated-pdf/
 ├── temp/               # 中间 Markdown 文件
 ├── scripts/            # 核心脚本
 │   ├── polling.py      # 任务轮询器
-│   ├── save.py        # PDF 保存器
+│   ├── save.py         # PDF 保存器
 │   ├── realtime_save.py # 实时图片保存
 │   ├── tavily_search.py # 图片搜索
-│   └── creaa_ai.py    # AI 生图
-├── error_log.txt      # 错误日志
-├── requirements.txt   # Python 依赖
+│   └── creaa_ai.py     # AI 生图
+├── error_log.txt       # 错误日志
+├── requirements.txt    # Python 依赖
 └── README.md
 ```
+
+---
 
 ## 使用流程
 
@@ -81,7 +112,9 @@ text-to-illustrated-pdf/
 4. 根据需求调用 Tavily 搜索或 Creaa AI 生成
 5. 调用 `save.py` 生成 PDF
 
-## 生图模型
+---
+
+## 生图模型（Creaa 平台）
 
 | 模型 | 说明 | 免费额度 |
 |------|------|----------|
@@ -89,6 +122,10 @@ text-to-illustrated-pdf/
 | `seedream-5.0` | 高质量 | 每天10张 |
 | `nano-banana-2` | 多图编辑 | 每天5张 |
 | `nano-banana-pro` | 专业级 | 每天1张 |
+
+> ⚠️ 以上免费额度基于 Creaa 平台活动，可能有变化。请以 [Creaa 官网](https://creaa.ai) 实时数据为准。
+
+---
 
 ## 配图分析逻辑
 
@@ -110,6 +147,8 @@ text-to-illustrated-pdf/
 
 如果 Tavily 搜索失败，自动降级为 Creaa AI 生成。
 
+---
+
 ## 示例
 
 ### 搜索图片
@@ -127,13 +166,17 @@ python3 scripts/creaa_ai.py "瀑布、水流、草地以及远处的山坡，风
 python3 scripts/save.py --filename "极简" < temp/极简.md
 ```
 
+---
+
 ## 环境变量
 
-| 变量 | 说明 | 默认值 |
-|------|------|--------|
-| `CREAA_API_KEY` | Creaa AI API 密钥 | 必需 |
-| `TAVILY_API_KEY` | Tavily API 密钥 | 必需 |
-| `TEXT_TO_PDF_DIR` | 工作目录 | 脚本所在目录 |
+| 变量 | 说明 | 必需 |
+|------|------|------|
+| `CREAA_API_KEY` | Creaa AI API 密钥 | ✅ 是 |
+| `TAVILY_API_KEY` | Tavily API 密钥 | ✅ 是 |
+| `TEXT_TO_PDF_DIR` | 工作目录 | ❌ 否 |
+
+---
 
 ## 错误处理
 
@@ -141,3 +184,11 @@ python3 scripts/save.py --filename "极简" < temp/极简.md
 - 任务轮询失败
 - 图片搜索/生成失败
 - PDF 转换失败
+
+---
+
+## 相关链接
+
+- **Tavily Search Skill**: https://clawhub.ai/Jacky1n7/openclaw-tavily-search
+- **Creaa AI 官网**: https://creaa.ai
+- **Creaa AI 使用指南**: https://creaa.ai/blog/openclaw-skill
